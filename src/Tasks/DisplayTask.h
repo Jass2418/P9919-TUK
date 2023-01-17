@@ -7,9 +7,9 @@ class DisplayTask {
     public:
         static void setup(){
             display.begin();
-            display.setBrightness(254);
+            display.setBrightness(100);
             display2.begin();
-            display2.setBrightness(254);
+            display2.setBrightness(100);
             lastTime = now();
         };
         static void loop(){
@@ -17,14 +17,13 @@ class DisplayTask {
                 display.clear();
                 display2.clear();
 
-                display.setDisplay(db.velocity,3);
+                display.setDisplay(db.velocity,4);
                 display.setDisplayFloat(db.tonHours,2,2);
                 display.setDisplay(db.production,6);
-
-                display2.setDisplay(db.velocity,3);
-                display2.setDisplayFloat(db.tonHours,2,2);
-                display2.setDisplay(db.production,6);
-
+                display.setDisplay(db.velocity,4);
+                display.setDisplayFloat(db.tonHours,2,2);
+                display.setDisplay(db.production,6);
+                
                 display.show();
                 display2.show();
             }

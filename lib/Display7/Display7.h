@@ -11,7 +11,8 @@ class Display7 {
     public :
         Display7(int sPin, int dPin, int cPin, int oPin, int bright = 254);
         void begin();
-        void setDisplay(int num, int zeroPosition = 0, bool isShown = true);
+        void setDisplay(uint32_t num, int zeroPosition = 0, bool isShown = true);
+        void setDisplayU32(uint32_t num, int zeroPosition = 0, bool isShown = true);
         void setDisplayFloat(float num, int decimalPosition = 2, int zeroPosition = 0, bool isShown = true);
         void setDisplayRaw(int value, bool isShown = true);
         void setDigit(int value, bool hasDot = false, bool isShown = true);

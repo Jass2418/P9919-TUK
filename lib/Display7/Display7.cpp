@@ -32,7 +32,23 @@ void Display7::begin(){
     #endif
 }
 
-void Display7::setDisplay(int num, int zeroPosition, bool isShown){
+void Display7::setDisplay(uint32_t num, int zeroPosition, bool isShown){
+    if(num == 0)
+        digits.add(0);
+    while(num > 0) //do till num greater than  0
+    {
+        int mod = num % 10;  //split last digit from number
+        digits.add(mod);
+        num = num / 10;    //divide num by 10. num /= 10 also a valid one 
+    }
+    while (digits.size() < zeroPosition)
+        digits.add(0);
+
+    while (digits.size() > 0)
+        setDigit(digits.pop(),false,isShown);
+}
+
+void Display7::setDisplayU32(uint32_t num, int zeroPosition, bool isShown){
     if(num == 0)
         digits.add(0);
     while(num > 0) //do till num greater than  0
