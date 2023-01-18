@@ -12,6 +12,7 @@ class SystemTask {
             Serial.begin(9600);
             setTime(DEFAULT_TIME);
             db.startTime = now();
+            db.isProductionActive = true;
         };
         static void loop(){
             // Reboot with Flag
@@ -26,7 +27,7 @@ class SystemTask {
         };
     private:
         static void reboot(){
-            wd.reboot();
+            //wd.reboot();
         }
 };
 #endif

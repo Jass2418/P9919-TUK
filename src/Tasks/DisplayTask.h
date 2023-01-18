@@ -7,16 +7,13 @@ class DisplayTask {
     public:
         static void setup(){
             display.begin();
-            display.setBrightness(100);
-            display2.begin();
-            display2.setBrightness(100);
+            display.setBrightness(40);
             lastTime = now();
         };
         static void loop(){
             if(numberOfSeconds(lastTime - now()) > UPDATE_DISPLAY_SEC ){
                 display.clear();
-                display2.clear();
-
+                
                 display.setDisplay(db.velocity,4);
                 display.setDisplayFloat(db.tonHours,2,2);
                 display.setDisplay(db.production,6);
@@ -25,17 +22,14 @@ class DisplayTask {
                 display.setDisplay(db.production,6);
                 
                 display.show();
-                display2.show();
             }
         };
     private:
         static Display7 display;
-        static Display7 display2;
         static time_t lastTime;
 };
 
 Display7 DisplayTask::display(4,5,7,9); // Strobe,Data,Clock,OE
-Display7 DisplayTask::display2(4,5,7,9); // Strobe,Data,Clock,OE
 
 time_t DisplayTask::lastTime = 0;
 #endif

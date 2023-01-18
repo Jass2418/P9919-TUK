@@ -27,10 +27,13 @@ class SensorTask {
         };
         static void loop(){
             // Buttons
-            if(resetBtn.read() == Button::PRESSED)
+            if(resetBtn.pressed()){
                 db.production = 0;
-            if(startStopBtn.read() == Button::PRESSED)
-                db.isProductionActive = false;
+            }
+                
+            if(startStopBtn.pressed()){
+                db.isProductionActive = !db.isProductionActive;
+            }
             // Analog Sensors
             velocitySensor.update();
             weightSensor.update();
@@ -39,6 +42,7 @@ class SensorTask {
             db.velocity = map(velocitySensor.getValue(),MIN_V_ANALOG,MAX_V_ANALOG,MIN_V_VEL,MAX_V_VEL);
             if(numberOfMinutes(now() - lastTime) >= UPDATE_PROD && db.isProductionActive){
                 db.production += db.velocity;
+                lastTime = now();
             }
         };
     private:
