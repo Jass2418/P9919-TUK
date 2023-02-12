@@ -13,9 +13,9 @@
 #define MIN_V_VEL 0
 #define MAX_V_VEL 700
 
-#define MIN_V_W 0.0
-#define MAX_V_WEIGHT 99.99
-
+#define MIN_V_W 0
+#define MAX_V_W 3015
+#define OFF_V_W 205
 #define UPDATE_PROD 1
 
 class SensorTask {
@@ -38,8 +38,14 @@ class SensorTask {
             velocitySensor.update();
             weightSensor.update();
 
-            db.tonHours = map(weightSensor.getValue(),MIN_V_ANALOG,MAX_V_ANALOG,MIN_V_W,MAX_V_WEIGHT);
-            db.velocity = map(velocitySensor.getValue(),MIN_V_ANALOG,MAX_V_ANALOG,MIN_V_VEL,MAX_V_VEL);
+            db.tonHours = (map(weightSensor.getValue(),OFF_V_W,MAX_V_ANALOG,MIN_V_W,MAX_V_W))/100.0;
+            if(db.tonHours < 0)
+                db.tonHours = 0.0;
+            db.velocity = map(velocitySensor.getValue(),OFF_V_W,MAX_V_ANALOG,MIN_V_VEL,MAX_V_VEL);
+            if(db.velocity < 0)
+                db.velocity = 0;
+            if(db.velocity > 700)
+                db.velocity = 0;
             if(numberOfMinutes(now() - lastTime) >= UPDATE_PROD && db.isProductionActive){
                 db.production += db.velocity;
                 lastTime = now();

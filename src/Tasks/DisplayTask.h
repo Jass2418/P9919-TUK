@@ -13,7 +13,6 @@ class DisplayTask {
         static void loop(){
             if(numberOfSeconds(lastTime - now()) > UPDATE_DISPLAY_SEC ){
                 display.clear();
-                
                 display.setDisplay(db.velocity,4);
                 display.setDisplayFloat(db.tonHours,2,2);
                 display.setDisplay(db.production,6);
